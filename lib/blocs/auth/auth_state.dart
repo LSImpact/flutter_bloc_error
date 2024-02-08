@@ -5,6 +5,10 @@ abstract class AuthState {
   const AuthState();
 }
 
+class AuthStateUnknown extends AuthState {
+  const AuthStateUnknown();
+}
+
 class AuthStateLoggedIn extends AuthState {
   const AuthStateLoggedIn();
 }

@@ -3,7 +3,6 @@ import 'package:bloc_closing_question/blocs/auth/auth_event.dart';
 import 'package:bloc_closing_question/blocs/home/home_bloc.dart';
 import 'package:bloc_closing_question/blocs/home/home_event.dart';
 import 'package:bloc_closing_question/blocs/home/home_state.dart';
-import 'package:bloc_closing_question/views/form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,13 +21,8 @@ class _HomeViewState extends State<HomeView> {
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeStateCompleted) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                  value: BlocProvider.of<AuthBloc>(context),
-                  child: const FormView(),
-                ),
-              ),
+            Navigator.of(context).pushReplacementNamed(
+              '/form',
             );
           }
         },
