@@ -6,6 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AuthView extends StatefulWidget {
   const AuthView({super.key});
 
+  static route() {
+    return MaterialPageRoute<void>(builder: (_) => const AuthView());
+  }
+
   @override
   State<AuthView> createState() => _AuthViewState();
 }

@@ -3,11 +3,16 @@ import 'package:bloc_closing_question/blocs/auth/auth_event.dart';
 import 'package:bloc_closing_question/blocs/home/home_bloc.dart';
 import 'package:bloc_closing_question/blocs/home/home_event.dart';
 import 'package:bloc_closing_question/blocs/home/home_state.dart';
+import 'package:bloc_closing_question/views/form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const HomeView());
+  }
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -21,8 +26,9 @@ class _HomeViewState extends State<HomeView> {
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeStateCompleted) {
-            Navigator.of(context).pushReplacementNamed(
-              '/form',
+            Navigator.of(context).pushAndRemoveUntil(
+              FormView.route(),
+              (route) => false,
             );
           }
         },

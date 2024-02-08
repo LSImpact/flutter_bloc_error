@@ -7,25 +7,28 @@ import 'package:bloc_closing_question/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FormView extends StatelessWidget {
+class FormView extends StatefulWidget {
   const FormView({super.key});
 
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const FormView());
+  }
+
+  @override
+  State<FormView> createState() => _FormViewState();
+}
+
+class _FormViewState extends State<FormView> {
   @override
   Widget build(BuildContext context) {
-    // var authBloc = BlocProvider.of<AuthBloc>(context);
-    //auth bloc is open here
     return BlocProvider(
       create: (context) => FormBloc(),
       child: BlocConsumer<FormBloc, FormBlocState>(
         listener: (context, state) {
           if (state is FormStateCompleted) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                  value: BlocProvider.of<AuthBloc>(context),
-                  child: const HomeView(),
-                ),
-              ),
+            Navigator.of(context).pushAndRemoveUntil(
+              HomeView.route(),
+              (route) => false,
             );
           }
         },
